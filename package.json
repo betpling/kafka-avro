@@ -33,7 +33,7 @@
     "bunyan": "^1.8.5",
     "bunyan-format": "^0.2.1",
     "cip": "^1.0.0",
-    "node-rdkafka": "~2.3.4"
+    "node-rdkafka": "github:iradul/node-rdkafka#fix-windows-build"
   },
   "devDependencies": {
     "chai": "^3.5.0",

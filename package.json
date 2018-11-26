@@ -27,7 +27,7 @@
     "test": "eslint lib && mocha -b test/spec && eslint lib/**"
   },
   "dependencies": {
-    "avsc": "^5.2.3",
+    "avsc": "github:betpling/avsc",
     "axios": "^0.15.3",
     "bluebird": "^3.4.6",
     "bunyan": "^1.8.5",

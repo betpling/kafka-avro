@@ -12,7 +12,7 @@ var schemaFix = require('../fixtures/schema.fix');
 
 describe('Magic Byte', function() {
 
-  it('should encode a large message', function() {
+  it('should encode a large message', function(done) {
     var message = {
       name: new Array(40000).join('0'),
       long: 540,
@@ -20,10 +20,11 @@ describe('Magic Byte', function() {
 
     var type = avro.parse(schemaFix, {wrapUnions: true});
 
-    magicByte.toMessageBuffer(message, type, 109);
+    magicByte.toMessageBuffer(message, type, 109)
+      .then(() => done());
   });
 
-  it('should extract schemaId from encoded message', function() {
+  it('should extract schemaId from encoded message', function(done) {
     var message = {
       name: new Array(40).join('0'),
       long: 540,
@@ -33,16 +34,18 @@ describe('Magic Byte', function() {
 
     var type = avro.parse(schemaFix, {wrapUnions: true});
 
-    var encoded = magicByte.toMessageBuffer(message, type, schemaId);
-
-    var decoded = magicByte.fromMessageBuffer(type, encoded, {
-      schemaTypeById: {
-        schemaId: schemaId
-      }
-    });
-
-    expect(decoded.value.name).to.equal(message.name);
-    expect(decoded.value.long).to.equal(message.long);
-    expect(decoded.schemaId).to.equal(schemaId);
+    magicByte.toMessageBuffer(message, type, schemaId).then(encoded => {
+      return magicByte.fromMessageBuffer(type, encoded, {
+        schemaTypeById: {
+          schemaId: schemaId
+        }
+      })
+      .then(decoded => {
+        expect(decoded.value.name).to.equal(message.name);
+        expect(decoded.value.long).to.equal(message.long);
+        expect(decoded.schemaId).to.equal(schemaId);
+      });
+    })
+    .then(() => done());
   });
 });

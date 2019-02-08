@@ -2,6 +2,10 @@
  * @fileOverview Test produce and consume messages using kafka-avro.
  */
 var chai = require('chai');
+var chaiAsPromised = require("chai-as-promised");
+
+chai.use(chaiAsPromised);
+
 var expect = chai.expect;
 
 var testLib = require('../lib/test.lib');
@@ -100,7 +104,8 @@ describe('Produce', function() {
     var binded = this.producer.produce.bind(this.producer, this.topicName,
       -1, message, 'key');
 
-    expect(binded).to.throw(Error);
+    // binded returns a promise, we need something like .to.be.rejectedWith(Error)
+    expect(binded()).to.eventually.be.rejectedWith(Error);
   });
   it('should not allow less attributes', function() {
     var message = {
@@ -109,7 +114,7 @@ describe('Produce', function() {
 
     var binded = this.producer.produce.bind(this.producer, this.topicName, -1, message, 'key');
 
-    expect(binded).to.throw(Error);
+    expect(binded()).to.eventually.be.rejectedWith(Error);
   });
 
 });

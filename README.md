@@ -1,4 +1,4 @@
-# kafka-avro - keyruler version [![Build status](https://api.travis-ci.com/keyruler/kafka-avro-keyruler.svg?branch=master)](https://travis-ci.com/keyruler/kafka-avro-keyruler)
+# kafka-avro - keyruler version [![Sponsor](https://johndoeinvest.com/logo-jdi-tag.png)](https://johndoeinvest.com/) [![Build status](https://api.travis-ci.com/keyruler/kafka-avro-keyruler.svg?branch=master)](https://travis-ci.com/keyruler/kafka-avro-keyruler)
 
 This is a fork of waldophotos/kafka-avro which intends to follow upstream with one major difference, that it is Promised based.
 

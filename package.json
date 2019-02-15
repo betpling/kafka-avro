@@ -1,23 +1,17 @@
 {
-  "name": "kafka-avro",
-  "version": "1.1.2",
+  "name": "kafka-avro-keyruler",
+  "version": "1.0.0",
   "main": "./lib/kafka-avro",
   "description": "Node.js bindings for librdkafka with Avro schema serialization.",
-  "homepage": "https://github.com/waldophotos/kafka-avro",
-  "bugs": "https://github.com/waldophotos/kafka-avro/issues",
+  "homepage": "https://github.com/keyruler/kafka-avro-keyruler",
+  "bugs": "https://github.com/keyruler/kafka-avro-keyruler/issues",
   "author": {
-    "name": "Thanasis Polychronakis",
-    "email": "thanpolas@gmail.com"
+    "name": "Henrik Olsson",
+    "email": "henrikolsson@outlook.com"
   },
-  "contributors": [
-    {
-      "name": "Ricardo Bin",
-      "email": "ricardohbin@gmail.com"
-    }
-  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/waldophotos/kafka-avro"
+    "url": "https://github.com/keyruler/kafka-avro-keyruler"
   },
   "license": "MIT",
   "engines": {
@@ -27,7 +21,7 @@
     "test": "eslint lib && mocha -b test/spec && eslint lib/**"
   },
   "dependencies": {
-    "avsc": "github:keyruler/avsc-keyruler",
+    "avsc-keyruler": "1.0.0",
     "axios": "0.18.0",
     "bluebird": "3.5.3",
     "bunyan": "1.8.12",
@@ -37,7 +31,7 @@
   },
   "devDependencies": {
     "chai": "4.2.0",
-    "chai-as-promised": "^7.1.1",
+    "chai-as-promised": "7.1.1",
     "eslint": "5.12.0",
     "mocha": "5.2.0",
     "sinon": "7.2.2"

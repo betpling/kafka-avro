@@ -2,7 +2,7 @@
  * @fileOverview Test produce and consume messages using kafka-avro.
  */
 var chai = require('chai');
-var chaiAsPromised = require("chai-as-promised");
+var chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
 

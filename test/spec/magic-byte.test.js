@@ -3,7 +3,7 @@
  */
 var chai = require('chai');
 var expect = chai.expect;
-var avro = require('avsc');
+var avro = require('avsc-keyruler');
 
 // var testLib = require('../lib/test.lib');
 var magicByte = require('../../lib/magic-byte');
@@ -20,7 +20,7 @@ describe('Magic Byte', function () {
 
     avro.parse(schemaFix, { wrapUnions: true })
       .then(type => {
-        return magicByte.toMessageBuffer(message, type, 109)
+        return magicByte.toMessageBuffer(message, type, 109);
       })
       .then(() => done());
   });
@@ -46,7 +46,7 @@ describe('Magic Byte', function () {
               expect(decoded.value.long).to.equal(message.long);
               expect(decoded.schemaId).to.equal(schemaId);
             });
-        })
+        });
       })
       .then(() => done());
   });

@@ -256,8 +256,8 @@ describe('Consume', function() {
               done();
             }
             isDone = true;
+          });
         });
-      });
 
       setTimeout(() => {
         produceTime = Date.now();
@@ -294,7 +294,7 @@ describe('Consume', function() {
             consumerStream.consumer.disconnect();
             done();
           });
-      });
+        });
 
       setTimeout(() => {
         produceTime = Date.now();

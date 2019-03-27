@@ -21,7 +21,7 @@
     "test": "eslint lib && mocha -b test/spec && eslint lib/**"
   },
   "dependencies": {
-    "avsc-keyruler": "1.0.0",
+    "avsc-keyruler": "1.0.1",
     "axios": "0.18.0",
     "bluebird": "3.5.3",
     "bunyan": "1.8.12",

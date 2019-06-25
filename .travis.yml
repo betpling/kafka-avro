@@ -15,3 +15,13 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get -y install libsasl2-dev libssl-dev
   - docker-compose up -d
+
+jobs:
+  include:
+    - stage: NPM audit
+      script: npm audit
+      node_js: node
+
+stages:
+  - NPM audit
+  - test

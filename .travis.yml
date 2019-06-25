@@ -3,6 +3,7 @@ language: node_js
 sudo: required
 node_js:
   - '8.2.0'
+  - 'lts/*'
 services:
   - docker
 cache:
@@ -20,7 +21,7 @@ jobs:
   include:
     - stage: NPM audit
       script: npm audit
-      node_js: node
+      node_js: 'lts/*'
 
 stages:
   - NPM audit

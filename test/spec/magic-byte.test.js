@@ -3,7 +3,7 @@
  */
 var chai = require('chai');
 var expect = chai.expect;
-var avro = require('avsc-keyruler');
+var avro = require('avsc-keyruler/src/schema');
 
 // var testLib = require('../lib/test.lib');
 var magicByte = require('../../lib/magic-byte');
@@ -12,20 +12,17 @@ var schemaFix = require('../fixtures/schema.fix');
 
 describe('Magic Byte', function () {
 
-  it('should encode a large message', function (done) {
+  it('should encode a large message', function () {
     var message = {
       name: new Array(40000).join('0'),
       long: 540,
     };
 
-    avro.parse(schemaFix, { wrapUnions: true })
-      .then(type => {
-        return magicByte.toMessageBuffer(message, type, 109);
-      })
-      .then(() => done());
+    const type = avro.parse(schemaFix, { wrapUnions: true });
+    return magicByte.toMessageBuffer(message, type, 109);
   });
 
-  it('should extract schemaId from encoded message', function (done) {
+  it('should extract schemaId from encoded message', function () {
     var message = {
       name: new Array(40).join('0'),
       long: 540,
@@ -33,21 +30,19 @@ describe('Magic Byte', function () {
 
     var schemaId = 109;
 
-    avro.parse(schemaFix, { wrapUnions: true })
-      .then(type => {
-        return magicByte.toMessageBuffer(message, type, schemaId).then(encoded => {
-          return magicByte.fromMessageBuffer(type, encoded, {
-            schemaTypeById: {
-              schemaId: schemaId
-            }
-          })
-            .then(decoded => {
-              expect(decoded.value.name).to.equal(message.name);
-              expect(decoded.value.long).to.equal(message.long);
-              expect(decoded.schemaId).to.equal(schemaId);
-            });
-        });
-      })
-      .then(() => done());
+    const type = avro.parse(schemaFix, { wrapUnions: true });
+    return magicByte.toMessageBuffer(message, type, schemaId)
+      .then(encoded => {
+        return magicByte.fromMessageBuffer(type, encoded, {
+          schemaTypeById: {
+            ['schema-' + schemaId]: type
+          }
+        })
+          .then(decoded => {
+            expect(decoded.value.name).to.equal(message.name);
+            expect(decoded.value.long).to.equal(message.long);
+            expect(decoded.schemaId).to.equal(schemaId);
+          });
+      });
   });
 });
